@@ -20,13 +20,12 @@ jobs:
       
       - name: Install Dependency       
         run: |
-          npm install        
-          npm run build  # 构建build
+          npm install
           
-      - name: github branch
+      - name: Deploy with gh-pages
         run: |
-          git --work-tree build add --all
-          git --work-tree build commit -m "updated GitHub Pages"
-          git push:origin HEAD:gh-pages --force
-          git checkout -f main
+         git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+         npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
+        env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
