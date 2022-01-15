@@ -16,9 +16,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2  #安装node.js
         with:
-          node-version: '14'
+          node-version: '16'
           
       - name: Install Dependency       
         run: |
           npm install        
-          npm run deploy  #脚本存在根目录scripts文件夹下
+          npm run build  # 构建build
