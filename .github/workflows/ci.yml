@@ -17,12 +17,16 @@ jobs:
         uses: actions/setup-node@v2  #安装node.js
         with:
           node-version: '16'
-      - name: github user config
-        run: |
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "${GITHUB_ACTOR}@gmail.com"
-          
+      
       - name: Install Dependency       
         run: |
           npm install        
-          npm run deploy  # 构建build
+          npm run build  # 构建build
+          
+      - name: github branch
+        run: |
+          git --work-tree build add --all
+          git --work-tree build commit -m "updated GitHub Pages"
+          git push:origin HEAD:gh-pages --force
+          git checkout -f main
+          
